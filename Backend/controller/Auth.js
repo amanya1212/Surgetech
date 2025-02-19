@@ -34,14 +34,14 @@ exports.sendOTP = async (req, res) => {
             specialChars: false,
         });
 
-        // console.log("printing the otp generated", otp);
+        console.log("printing the otp generated", otp);
 
         // now we have to make sure that the otp is unique \
         // so we first need to check otp 
         let result = await OTP.findOne({ otp: otp });
-        // console.log("Result is Generate OTP Func");
-        // console.log("OTP", otp);
-        // console.log("Result", result);
+        console.log("Result is Generate OTP Func");
+        console.log("OTP", otp);
+        console.log("Result", result);
         // is we got the same otp then we will generate new otp
         while (result) {
             otp = otpGenerator.generate(6, {
@@ -290,7 +290,7 @@ exports.changePassword = async (req, res) => {
                     `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
                 )
             );
-            // console.log("Email sent successfully:", emailResponse.response);
+            console.log("Email sent successfully:", emailResponse.response);
         } catch (error) {
             // If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
             // console.error("Error occurred while sending email:", error);
