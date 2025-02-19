@@ -28,13 +28,16 @@ export function sendOTP(email, navigate) {
             if (!result.data.success) {
                 throw new Error(result.data.message)
             }
-
             toast.success("OTP sent Successfull");
             navigate("/verify-email");
         } catch (error) {
+            if (error.response && error.response.status === 401) {
+                toast.error("User Already exist");
+                navigate("/login");
+            }
             console.error("send opt error", error);
-            toast.error("not able to send OTP");
-        }
+            toast.error("Not able to send OTP", error);
+        }        
         dispatch(setLoading(false));
         toast.dismiss(toastId);
     }
